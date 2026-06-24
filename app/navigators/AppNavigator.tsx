@@ -8,20 +8,16 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { EpisodeListScreen } from "@/screens/EpisodeListScreen"
+import { EpisodeScreen } from "@/screens/EpisodeScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
-import { WelcomeScreen } from "@/screens/WelcomeScreen"
 import { useAppTheme } from "@/theme/context"
 
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
-/**
- * This is a list of all the route names that will exit the app if the back button
- * is pressed while in that screen. Only affects Android.
- */
 const exitRoutes = Config.exitRoutes
 
-// Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = () => {
@@ -38,10 +34,10 @@ const AppStack = () => {
           backgroundColor: colors.background,
         },
       }}
+      initialRouteName="EpisodeList"
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="EpisodeList" component={EpisodeListScreen} />
+      <Stack.Screen name="Episode" component={EpisodeScreen} />
     </Stack.Navigator>
   )
 }
