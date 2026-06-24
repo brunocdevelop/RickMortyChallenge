@@ -1,77 +1,117 @@
-# Welcome to your new ignited app!
+# Rick and Morty Wiki
 
-> The latest and greatest boilerplate for Infinite Red opinions
+A small React Native app (Expo) that lists Rick and Morty episodes and characters — a lightweight wiki/demo built with TypeScript and modern React Native tooling.
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+## Quick overview
 
-- [Quick start documentation](https://github.com/infinitered/ignite/blob/master/docs/boilerplate/Boilerplate.md)
-- [Full documentation](https://github.com/infinitered/ignite/blob/master/docs/README.md)
+- **Platform:** React Native (Expo Managed + Dev Client)
+- **Language:** TypeScript
+- **Main entry:** [index.tsx](index.tsx#L1)
+- **App root:** [app/app.tsx](app/app.tsx#L1)
 
-## Getting Started
+## Features
+
+- Browse episodes and seasons
+- Episode details and character lists
+- Theming and i18n-ready strings
+
+## Prerequisites
+
+- Node.js >= 20
+- npm or yarn
+- Xcode (for iOS simulator) or Android Studio (for Android emulator) if you run natively
+- Optional: EAS CLI for cloud/local builds (`npm i -g eas-cli`)
+
+## Quick start
+
+Install dependencies and start the dev server:
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 npm run start
 ```
 
-To make things work on your local simulator, or on your phone, you need first to [run `eas build`](https://github.com/infinitered/ignite/blob/master/docs/expo/EAS.md). We have many shortcuts on `package.json` to make it easier:
+Open the app on a device or simulator:
 
-```bash
-npm run build:ios:sim # build for ios simulator
-npm run build:ios:device # build for ios device
-npm run build:ios:prod # build for ios device
-```
+- iOS simulator: `npm run ios`
+- Android emulator: `npm run android`
 
-### `./assets`
+This project uses the Expo dev client (`expo-dev-client`). Use the QR code from `npm run start` with your dev client app, or run on a simulator with the scripts above.
 
-This directory is designed to organize and store various assets, making it easy for you to manage and use them in your application. The assets are further categorized into subdirectories, including `icons` and `images`:
+## Building
 
-```tree
-assets
-├── icons
-└── images
-```
+Local EAS builds are provided via scripts in `package.json`:
 
-**icons**
-This is where your icon assets will live. These icons can be used for buttons, navigation elements, or any other UI components. The recommended format for icons is PNG, but other formats can be used as well.
+- `npm run build:ios:sim` — build iOS simulator locally
+- `npm run build:android:sim` — build Android locally
 
-Ignite comes with a built-in `Icon` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/boilerplate/app/components/Icon.md).
+For cloud builds, configure `eas.json` and run `eas build --platform <ios|android>`.
 
-**images**
-This is where your images will live, such as background images, logos, or any other graphics. You can use various formats such as PNG, JPEG, or GIF for your images.
+## Testing & linting
 
-Another valuable built-in component within Ignite is the `AutoImage` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-AutoImage.md).
+- Run unit tests: `npm test`
+- Run tests in watch mode: `npm run test:watch`
+- Lint and auto-fix: `npm run lint`
 
-How to use your `icon` or `image` assets:
+## Project layout (high level)
 
-```typescript
-import { Image } from 'react-native';
+- [app/screens/EpisodeListScreen.tsx](app/screens/EpisodeListScreen.tsx#L1) — main episode list
+- [app/screens/EpisodeScreen.tsx](app/screens/EpisodeScreen.tsx#L1) — episode detail view
+- [app/components](app/components) — reusable UI components (Card, Button, AutoImage, etc.)
+- [app/services/api](app/services/api) — API wrappers
+- [app/theme](app/theme) — colors, spacing, typography
 
-const MyComponent = () => {
-  return (
-    <Image source={require('assets/images/my_image.png')} />
-  );
-};
-```
+## Where to look first
 
-## Running Maestro end-to-end tests
+- App entry: [app/app.tsx](app/app.tsx#L1)
+- Navigation setup: [app/navigators/AppNavigator.tsx](app/navigators/AppNavigator.tsx#L1)
+- Episode list: [app/screens/EpisodeListScreen.tsx](app/screens/EpisodeListScreen.tsx#L1)
 
-Follow our [Maestro Setup](https://ignitecookbook.com/docs/recipes/MaestroSetup) recipe.
+---
 
-## Next Steps
+## React Native Technical Challenge
 
-### Ignite Cookbook
+Hello! This project can be used as the submission for the React Native technical challenge. Below are the original instructions used for the exercise — keep them as a reference for requirements, evaluation criteria, and bonus ideas.
 
-[Ignite Cookbook](https://ignitecookbook.com/) is an easy way for developers to browse and share code snippets (or “recipes”) that actually work.
+### Getting Started
 
-### Upgrade Ignite boilerplate
+1. Project Setup
 
-Read our [Upgrade Guide](https://ignitecookbook.com/docs/recipes/UpdatingIgnite) to learn how to upgrade your Ignite project.
+	- The challenge uses the Ignite CLI React Native boilerplate. To start a fresh project, follow the Ignite README: https://github.com/infinitered/ignite
+	- Create a new project named `RickMortyChallenge` when starting from scratch.
+	- When prompted, choose **React Navigation** (not Expo Router).
+	- The project is TypeScript-ready and includes pre-built components from the Ignite boilerplate.
 
-## Community
+### The Challenge
 
-⭐️ Help us out by [starring on GitHub](https://github.com/infinitered/ignite), filing bug reports in [issues](https://github.com/infinitered/ignite/issues) or [ask questions](https://github.com/infinitered/ignite/discussions).
+Build a small app that consumes the Rick and Morty REST API: https://rickandmortyapi.com/documentation/#rest
 
-💬 Join us on [Slack](https://join.slack.com/t/infiniteredcommunity/shared_invite/zt-1f137np4h-zPTq_CbaRFUOR_glUFs2UA) to discuss.
+Required screens:
 
-📰 Make our Editor-in-chief happy by [reading the React Native Newsletter](https://reactnativenewsletter.com/).
+- Screen 1 — Episodes List: display all episodes showing episode name, air date, and episode number (season + episode format).
+- Screen 2 — Episode Detail: show episode information and a list of characters appearing in the episode. For each character show image, name, and status (Alive, Dead, Unknown).
+
+### What We Value
+
+- Clean, readable code and separation of concerns
+- Efficient API usage and data handling
+- Loading states and error handling
+- Responsive UI across screen sizes
+- Modern React Native patterns and best practices
+
+### Time Expectation
+
+This challenge is designed to be completed in ~1 hour. Prioritize core functionality, clean architecture, and polish if time allows.
+
+### Bonus Ideas
+
+- Search functionality
+- Pull-to-refresh
+- Offline handling / caching improvements
+- Custom animations
+- Additional character details
+
+### Getting Help
+
+- Ignite boilerplate docs: https://github.com/infinitered/ignite
+- Rick and Morty API docs: https://rickandmortyapi.com/documentation/#rest
